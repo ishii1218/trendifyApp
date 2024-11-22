@@ -1,0 +1,5 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "cmake.sourceDirectory": "E:/MobileApplication/trendify/linux",
+  "java.configuration.updateBuildConfiguration": "automatic"
+}
