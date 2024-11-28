@@ -92,12 +92,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
+                        filled: true, // Enable the fill color
+                        fillColor: Color.fromARGB(255, 245, 245, 245),
                         hintText: 'youremail@email.com',
                         prefixIcon: Container(
                           padding: const EdgeInsets.all(12),
                           child: const Icon(IconlyLight.message),
                         ),
-                        filled: true,
                       ),
                       validator: (value) {
                         return MyValidators.emailValidator(value);
@@ -109,33 +110,31 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
 
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
 
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(
+                        255, 245, 245, 245), // Set the background color
                     padding: const EdgeInsets.all(12),
-                    // backgroundColor: Colors.red,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        10,
-                      ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  icon: const Icon(IconlyBold.send),
                   label: const Text(
                     "Request link",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 16,
                     ),
                   ),
                   onPressed: () async {
                     _forgetPassFCT();
                   },
                 ),
-              ),
+              )
             ],
           ),
         ),

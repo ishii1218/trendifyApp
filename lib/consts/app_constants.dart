@@ -13,44 +13,39 @@ class AppConstants {
 
   static List<CategoriesModel> categoriesList = [
     CategoriesModel(
-      id: "Phones",
-      image: AssetsManager.mobiles,
-      name: "Phones",
+      id: "Shirts",
+      image: AssetsManager.shirt,
+      name: "Shirts",
     ),
     CategoriesModel(
-      id: "Laptops",
-      image: AssetsManager.pc,
-      name: "Laptops",
+      id: "Trousers",
+      image: AssetsManager.trousers,
+      name: "Trousers",
     ),
     CategoriesModel(
-      id: "Electronics",
-      image: AssetsManager.electronics,
-      name: "Electronics",
+      id: "Hoodie",
+      image: AssetsManager.hoodie,
+      name: "Hoodie",
     ),
     CategoriesModel(
-      id: "Watches",
-      image: AssetsManager.watch,
-      name: "Watches",
+      id: "Vest",
+      image: AssetsManager.vest,
+      name: "Vest",
     ),
     CategoriesModel(
-      id: "Clothes",
-      image: AssetsManager.fashion,
-      name: "Clothes",
+      id: "Shorts",
+      image: AssetsManager.shorts,
+      name: "Shorts",
     ),
     CategoriesModel(
-      id: "Shoes",
-      image: AssetsManager.shoes,
-      name: "Shoes",
+      id: "Beanie",
+      image: AssetsManager.beanie,
+      name: "Beanie",
     ),
     CategoriesModel(
-      id: "Books",
-      image: AssetsManager.book,
-      name: "Books",
-    ),
-    CategoriesModel(
-      id: "Cosmetics",
-      image: AssetsManager.cosmetics,
-      name: "Cosmetics",
+      id: "Coat",
+      image: AssetsManager.coat,
+      name: "Coat",
     ),
   ];
 }

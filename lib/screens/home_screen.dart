@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                       }),
                 ),
               ),
-              const TitlesTextWidget(label: "Categories"),
+              const TitlesTextWidget(label: "Mens Section"),
               const SizedBox(
                 height: 15.0,
               ),

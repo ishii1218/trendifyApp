@@ -34,14 +34,13 @@ class AssetsManager {
   static String banner1 = "$bannersImagesPath/banner1.png";
   static String banner2 = "$bannersImagesPath/banner2.png";
   // Categories path
-  static String mobiles = "$categoriesImagesPath/mobiles.png";
-  static String fashion = "$categoriesImagesPath/fashion.png";
-  static String watch = "$categoriesImagesPath/watch.png";
-  static String book = "$categoriesImagesPath/book_img.png";
-  static String electronics = "$categoriesImagesPath/electronics.png";
-  static String cosmetics = "$categoriesImagesPath/cosmetics.png";
-  static String shoes = "$categoriesImagesPath/shoes.png";
-  static String pc = "$categoriesImagesPath/pc.png";
+  static String shirt = "$categoriesImagesPath/shirt.png";
+  static String trousers = "$categoriesImagesPath/trousers.png";
+  static String hoodie = "$categoriesImagesPath/hoodie.png";
+  static String vest = "$categoriesImagesPath/vest.png";
+  static String beanie = "$categoriesImagesPath/beanie.png";
+  static String coat = "$categoriesImagesPath/coat.png";
+  static String shorts = "$categoriesImagesPath/shorts.png";
 
   static String order = "$dashboardImagesPath/order.png";
   static String cloud = "$dashboardImagesPath/cloud.png";

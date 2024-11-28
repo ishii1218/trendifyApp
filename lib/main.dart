@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -26,8 +27,21 @@ import 'screens/inner_screen/orders/orders_screen.dart';
 import 'screens/inner_screen/wishlist.dart';
 import 'screens/search_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyCtYTs3UnxZ1tM-E_DlZanKytQ10WjzjRA",
+            authDomain: "trendify-fdbf0.firebaseapp.com",
+            projectId: "trendify-fdbf0",
+            storageBucket: "trendify-fdbf0.firebasestorage.app",
+            messagingSenderId: "970044811034",
+            appId: "1:970044811034:web:7ea7484fb5a84882406ea3"));
+  } else {
+    await Firebase.initializeApp();
+  }
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const MyApp());
@@ -37,7 +51,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<FirebaseApp>(

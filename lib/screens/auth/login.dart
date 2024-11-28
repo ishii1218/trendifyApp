@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
           password: _passwordController.text.trim(),
         );
         Fluttertoast.showToast(
-          msg: "Login Succeful",
+          msg: "Login Successful",
           textColor: Colors.white,
         );
         if (!mounted) return;
@@ -127,10 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 16,
                   ),
                   const Align(
-                      alignment: Alignment.centerLeft,
+                      alignment: Alignment.center,
                       child: TitlesTextWidget(label: "Welcome back!")),
                   const SizedBox(
-                    height: 16,
+                    height: 180,
                   ),
                   Form(
                     key: _formkey,
@@ -143,7 +143,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
-                            hintText: "Email address",
+                            filled: true, // Enable the fill color
+                            fillColor: Color.fromARGB(255, 245, 245, 245),
+                            hintText: "Email",
                             prefixIcon: Icon(
                               IconlyLight.message,
                             ),
@@ -166,6 +168,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
+                            filled: true, // Enable the fill color
+                            fillColor: Color.fromARGB(255, 245, 245, 245),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
@@ -191,10 +195,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                         const SizedBox(
-                          height: 16.0,
+                          height: 3.0,
                         ),
                         Align(
-                          alignment: Alignment.centerRight,
+                          alignment: Alignment.center,
                           child: TextButton(
                             onPressed: () {
                               Navigator.of(context).pushNamed(
@@ -203,102 +207,273 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: const SubtitleTextWidget(
                               label: "Forgot password?",
-                              fontStyle: FontStyle.italic,
+                              // fontStyle: FontStyle.italic,
+                              fontSize: 14,
                               textDecoration: TextDecoration.underline,
                             ),
                           ),
                         ),
                         const SizedBox(
-                          height: 16.0,
+                          height: 20.0,
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.all(12.0),
-                              // backgroundColor: Colors.red,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  12.0,
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(
+                                255, 80, 200, 120), // The background color
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: SizedBox(
+                            width: double
+                                .infinity, // To make the button fill the available width
+                            child: ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromARGB(255, 80, 200,
+                                    120), // Match the color of the DecoratedBox
+                                padding: const EdgeInsets.all(12.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
+                                elevation:
+                                    0, // Remove default elevation for a flat look
                               ),
+                              label: const Text("Login",
+                                  style: TextStyle(
+                                      color: Colors
+                                          .white)), // Optional: change text color
+                              onPressed: () async {
+                                await _loginFct();
+                              },
                             ),
-                            icon: const Icon(Icons.login),
-                            label: const Text("Login"),
-                            onPressed: () async {
-                              await _loginFct();
-                            },
                           ),
                         ),
+
                         const SizedBox(
-                          height: 16.0,
+                          height: 60.0,
                         ),
-                        SubtitleTextWidget(
-                          label: "Or connect using".toUpperCase(),
-                        ),
-                        const SizedBox(
-                          height: 16.0,
-                        ),
+                        // const SubtitleTextWidget(
+                        //   label: "or continue with",
+                        // ),
+
+                        // SizedBox(
+                        //   height: kBottomNavigationBarHeight + 10,
+                        //   child: Row(
+                        //     children: [
+                        //       const Expanded(
+                        //         flex: 2,
+                        //         child: SizedBox(
+                        //           height: kBottomNavigationBarHeight,
+                        //           child: FittedBox(
+                        //             child: GoogleButton(),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       const SizedBox(
+                        //         width: 8,
+                        //       ),
+                        //       Expanded(
+                        //         child: SizedBox(
+                        //           height: kBottomNavigationBarHeight,
+                        //           child: ElevatedButton(
+                        //             style: ElevatedButton.styleFrom(
+                        //               padding: const EdgeInsets.all(12.0),
+                        //               // backgroundColor: Colors.red,
+                        //               shape: RoundedRectangleBorder(
+                        //                 borderRadius: BorderRadius.circular(
+                        //                   12.0,
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //             child: const Text("Guest?"),
+                        //             onPressed: () async {
+                        //               Navigator.of(context)
+                        //                   .pushNamed(RootScreen.routeName);
+                        //             },
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+
                         SizedBox(
-                          height: kBottomNavigationBarHeight + 10,
-                          child: Row(
+                          // height: kBottomNavigationBarHeight + 10,
+                          child: Column(
                             children: [
-                              const Expanded(
-                                flex: 2,
-                                child: SizedBox(
-                                  height: kBottomNavigationBarHeight,
-                                  child: FittedBox(
-                                    child: GoogleButton(),
-                                  ),
+                              // Text for "or continue with"
+                              const Padding(
+                                padding: EdgeInsets.only(bottom: 10.0),
+                                child: Text(
+                                  "or continue with",
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Expanded(
-                                child: SizedBox(
-                                  height: kBottomNavigationBarHeight,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.all(12.0),
-                                      // backgroundColor: Colors.red,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          12.0,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Google Button
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: kBottomNavigationBarHeight,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                            side: BorderSide(
+                                                color: Colors.grey.shade300),
+                                          ),
+                                          padding: const EdgeInsets.all(10.0),
+                                        ),
+                                        onPressed: () {
+                                          // Add Google sign-in logic here
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          // children: [
+                                          //   Image.asset(
+                                          //     'assets/icons/google.png', // Path to Google logo
+                                          //     height: 20.0,
+                                          //   ),
+                                          //   const SizedBox(width: 10),
+                                          //   const Text(
+                                          //     "Google",
+                                          //     style: TextStyle(
+                                          //         color: Colors.black),
+                                          //   ),
+                                          // ],
+                                          children: [
+                                            Icon(
+                                              Icons
+                                                  .g_mobiledata, // Placeholder for Google icon (use appropriate icon if available)
+                                              color: Colors
+                                                  .red, // Google's branding color
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "Google",
+                                              style: TextStyle(
+                                                color: Colors
+                                                    .black, // Text color for Google branding
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                    child: const Text("Guest?"),
-                                    onPressed: () async {
-                                      Navigator.of(context)
-                                          .pushNamed(RootScreen.routeName);
-                                    },
                                   ),
+                                  const SizedBox(width: 8),
+                                  // Facebook Button
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: kBottomNavigationBarHeight,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.blue,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          padding: const EdgeInsets.all(10.0),
+                                        ),
+                                        onPressed: () {
+                                          // Add Facebook sign-in logic here
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.facebook,
+                                                color: Colors.white),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "Facebook",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  // Apple Button
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: kBottomNavigationBarHeight,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.black,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          padding: const EdgeInsets.all(10.0),
+                                        ),
+                                        onPressed: () {
+                                          // Add Apple sign-in logic here
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.apple,
+                                                color: Colors.white),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "Apple",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                ],
+                              ),
+                              // const SizedBox(height: 10),
+                              // Sign-in text
+
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .pushNamed(RegisterScreen.routName);
+                                },
+                                child: const Text(
+                                  "Already have an account? Sign in",
+                                  style: TextStyle(
+                                      fontSize: 14.0, color: Colors.grey),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 16.0,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const SubtitleTextWidget(label: "New here?"),
-                            TextButton(
-                              child: const SubtitleTextWidget(
-                                label: "Sign up",
-                                fontStyle: FontStyle.italic,
-                                textDecoration: TextDecoration.underline,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RegisterScreen.routName);
-                              },
-                            ),
-                          ],
-                        )
+
+                        // const SizedBox(
+                        //   height: 16.0,
+                        // ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     const SubtitleTextWidget(label: "New here?"),
+                        //     TextButton(
+                        //       child: const SubtitleTextWidget(
+                        //         label: "Sign up",
+                        //         fontStyle: FontStyle.italic,
+                        //         textDecoration: TextDecoration.underline,
+                        //       ),
+                        //       onPressed: () {
+                        //         Navigator.of(context)
+                        //             .pushNamed(RegisterScreen.routName);
+                        //       },
+                        //     ),
+                        //   ],
+                        // )
                       ],
                     ),
                   ),
