@@ -19,6 +19,8 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  String? selectedSize;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -86,6 +88,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         const SizedBox(
                           height: 20,
                         ),
+
+                        // Size dropdown
+                        DropdownButtonFormField<String>(
+                          value: selectedSize,
+                          decoration: const InputDecoration(
+                            labelText: "Select Size",
+                            border: OutlineInputBorder(),
+                          ),
+                          items: ["S", "M", "L", "XL", "XXL"]
+                              .map((size) => DropdownMenuItem(
+                                    value: size,
+                                    child: Text(size),
+                                  ))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedSize = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 30),
                           child: Row(
@@ -111,6 +134,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       ),
                                     ),
                                     onPressed: () async {
+                                      if (selectedSize == null) {
+                                        // Show warning if size is not selected
+                                        await MyAppFunctions
+                                            .showErrorOrWarningDialog(
+                                          context: context,
+                                          subtitle:
+                                              "Please select a size before adding to cart.",
+                                          fct: () {},
+                                        );
+                                        return;
+                                      }
                                       if (cartProvider.isProdinCart(
                                           productId:
                                               getCurrProduct.productId)) {
@@ -119,6 +153,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       try {
                                         await cartProvider.addToCartFirebase(
                                             productId: getCurrProduct.productId,
+                                            size: selectedSize!,
                                             qty: 1,
                                             context: context);
                                       } catch (e) {
