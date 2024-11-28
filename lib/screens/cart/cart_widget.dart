@@ -61,6 +61,7 @@ class CartWidget extends StatelessWidget {
                                         cartId: cartModel.cartId,
                                         productId: getCurrProduct.productId,
                                         qty: cartModel.quantity,
+                                        size: cartModel.size ?? "N/A",
                                       );
                                       // cartProvider.removeOneItem(
                                       //   productId: getCurrProduct.productId,
@@ -106,7 +107,9 @@ class CartWidget extends StatelessWidget {
                                   );
                                 },
                                 icon: const Icon(IconlyLight.arrowDown2),
-                                label: Text("Qty: ${cartModel.quantity}"),
+                                label: Text(
+                                  "Qty: ${cartModel.quantity}, Size: ${cartModel.size}",
+                                ),
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(width: 1),
                                   shape: RoundedRectangleBorder(

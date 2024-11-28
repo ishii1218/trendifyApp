@@ -18,11 +18,9 @@ class LatestArrivalProductsWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     final productsModel = Provider.of<ProductModel>(context);
     final cartProvider = Provider.of<CartProvider>(context);
-    
 
     final viewedProdProvider = Provider.of<ViewedProdProvider>(context);
     return Padding(
-      
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () async {
@@ -30,12 +28,10 @@ class LatestArrivalProductsWidget extends StatelessWidget {
           await Navigator.pushNamed(context, ProductDetailsScreen.routName,
               arguments: productsModel.productId);
         },
-        
         child: SizedBox(
           width: size.width * 0.45,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            
             children: [
               Flexible(
                 child: ClipRRect(
@@ -80,6 +76,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                                 await cartProvider.addToCartFirebase(
                                     productId: productsModel.productId,
                                     qty: 1,
+                                    size: "N/A",
                                     context: context);
                               } catch (e) {
                                 await MyAppFunctions.showErrorOrWarningDialog(

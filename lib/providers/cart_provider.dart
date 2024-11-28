@@ -19,6 +19,7 @@ class CartProvider with ChangeNotifier {
   Future<void> addToCartFirebase({
     required String productId,
     required int qty,
+    required String size,
     required BuildContext context,
   }) async {
     final User? user = _auth.currentUser;
@@ -32,6 +33,7 @@ class CartProvider with ChangeNotifier {
     }
     final uid = user.uid;
     final cartId = const Uuid().v4();
+    String selectedSize = (size == null || size.isEmpty) ? "N/A" : size;
     try {
       await userstDb.doc(uid).update({
         'userCart': FieldValue.arrayUnion([
@@ -39,6 +41,7 @@ class CartProvider with ChangeNotifier {
             'cartId': cartId,
             'productId': productId,
             'quantity': qty,
+            'size': selectedSize,
           }
         ])
       });
@@ -66,9 +69,11 @@ class CartProvider with ChangeNotifier {
         _cartItems.putIfAbsent(
           userDoc.get("userCart")[index]['productId'],
           () => CartModel(
-              cartId: userDoc.get("userCart")[index]['cartId'],
-              productId: userDoc.get("userCart")[index]['productId'],
-              quantity: userDoc.get("userCart")[index]['quantity']),
+            cartId: userDoc.get("userCart")[index]['cartId'],
+            productId: userDoc.get("userCart")[index]['productId'],
+            quantity: userDoc.get("userCart")[index]['quantity'],
+            size: userDoc.get("userCart")[index]['size'],
+          ),
         );
       }
     } catch (e) {
@@ -81,6 +86,7 @@ class CartProvider with ChangeNotifier {
     required String cartId,
     required String productId,
     required int qty,
+    required String size,
   }) async {
     final User? user = _auth.currentUser;
     try {
@@ -90,6 +96,7 @@ class CartProvider with ChangeNotifier {
             'cartId': cartId,
             'productId': productId,
             'quantity': qty,
+            'size': size,
           }
         ])
       });
@@ -116,16 +123,42 @@ class CartProvider with ChangeNotifier {
   }
 
 // Local
-  void addProductToCart({required String productId}) {
+  void addProductToCart({
+    required String productId,
+    required String size,
+  }) {
     _cartItems.putIfAbsent(
       productId,
       () => CartModel(
-          cartId: const Uuid().v4(), productId: productId, quantity: 1),
+        cartId: const Uuid().v4(),
+        productId: productId,
+        quantity: 1,
+        size: size,
+      ),
     );
     notifyListeners();
   }
 
-  void updateQty({required String productId, required int qty}) {
+  void updateSize({required String productId, required String size}) {
+    if (_cartItems.containsKey(productId)) {
+      final existingCartItem = _cartItems[productId];
+      _cartItems.update(
+        productId,
+        (cartItem) => CartModel(
+          cartId: existingCartItem!.cartId,
+          productId: existingCartItem.productId,
+          quantity: existingCartItem.quantity,
+          size: size, // Update the size here.
+        ),
+      );
+      notifyListeners();
+    }
+  }
+
+  void updateQty({
+    required String productId,
+    required int qty,
+  }) {
     _cartItems.update(
       productId,
       (cartItem) => CartModel(
@@ -168,8 +201,12 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeOneItem({required String productId}) {
-    _cartItems.remove(productId);
+  void removeOneItem({
+    required String productId,
+    required String size, // New parameter
+  }) {
+    _cartItems.removeWhere((key, value) =>
+        value.productId == productId && value.size == size); // Match size
     notifyListeners();
   }
 }

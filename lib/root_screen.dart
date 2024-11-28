@@ -9,6 +9,7 @@ import 'package:shopsmart_users_en/providers/user_provider.dart';
 import 'package:shopsmart_users_en/providers/wishlist_provider.dart';
 import 'package:shopsmart_users_en/screens/cart/cart_screen.dart';
 import 'package:shopsmart_users_en/screens/home_screen.dart';
+import 'package:shopsmart_users_en/screens/inner_screen/admin/dashboard_screen.dart';
 import 'package:shopsmart_users_en/screens/profile_screen.dart';
 import 'package:shopsmart_users_en/screens/search_screen.dart';
 
@@ -25,16 +26,13 @@ class _RootScreenState extends State<RootScreen> {
   int currentScreen = 0;
   late PageController controller;
   bool isLoadingProd = true;
+  bool isAdmin = false; // New flag to check admin status
+
   @override
   void initState() {
     super.initState();
-    screens = const [
-      HomeScreen(),
-      SearchScreen(),
-      CartScreen(),
-      ProfileScreen(),
-    ];
     controller = PageController(initialPage: currentScreen);
+    screens = _getScreens(); // Initialize screens based on the role
   }
 
   Future<void> fetchFCT() async {
@@ -42,27 +40,49 @@ class _RootScreenState extends State<RootScreen> {
         Provider.of<ProductsProvider>(context, listen: false);
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-
     final wishlistsProvider =
         Provider.of<WishlistProvider>(context, listen: false);
+
     try {
-      Future.wait({
+      await Future.wait([
         productsProvider.fetchProducts(),
-        userProvider.fetchUserInfo(),
-      });
-      Future.wait({
         cartProvider.fetchCart(),
         wishlistsProvider.fetchWishlist(),
+        _checkAdminStatus(userProvider), // Check if the user is an admin
+      ]);
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<void> _checkAdminStatus(UserProvider userProvider) async {
+    try {
+      final user = await userProvider.fetchUserInfo();
+      setState(() {
+        isAdmin = user?.userEmail == "admin@gmail.com"; // Check for admin email
+        screens = _getScreens(); // Update screens dynamically
       });
     } catch (error) {
       log(error.toString());
     }
   }
 
+  List<Widget> _getScreens() {
+    return [
+      const HomeScreen(),
+      const SearchScreen(),
+      if (isAdmin) const DashboardScreen() else const CartScreen(),
+      const ProfileScreen(),
+    ];
+  }
+
   @override
   void didChangeDependencies() {
     if (isLoadingProd) {
       fetchFCT();
+      setState(() {
+        isLoadingProd = false;
+      });
     }
     super.didChangeDependencies();
   }
@@ -70,6 +90,7 @@ class _RootScreenState extends State<RootScreen> {
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
+
     return Scaffold(
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
@@ -98,16 +119,23 @@ class _RootScreenState extends State<RootScreen> {
             icon: Icon(IconlyLight.search),
             label: "Search",
           ),
-          NavigationDestination(
-            selectedIcon: const Icon(IconlyBold.bag2),
-            icon: Badge(
-              backgroundColor: Colors.blue,
-              textColor: Colors.white,
-              label: Text(cartProvider.getCartitems.length.toString()),
-              child: const Icon(IconlyLight.bag2),
+          if (isAdmin)
+            const NavigationDestination(
+              selectedIcon: Icon(Icons.dashboard),
+              icon: Icon(Icons.dashboard_outlined),
+              label: "Dashboard",
+            )
+          else
+            NavigationDestination(
+              selectedIcon: const Icon(IconlyBold.bag2),
+              icon: Badge(
+                backgroundColor: Colors.blue,
+                textColor: Colors.white,
+                label: Text(cartProvider.getCartitems.length.toString()),
+                child: const Icon(IconlyLight.bag2),
+              ),
+              label: "Cart",
             ),
-            label: "Cart",
-          ),
           const NavigationDestination(
             selectedIcon: Icon(IconlyBold.profile),
             icon: Icon(IconlyLight.profile),
