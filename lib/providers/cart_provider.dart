@@ -33,7 +33,7 @@ class CartProvider with ChangeNotifier {
     }
     final uid = user.uid;
     final cartId = const Uuid().v4();
-    String selectedSize = (size == null || size.isEmpty) ? "N/A" : size;
+    String selectedSize = (size.isEmpty) ? "N/A" : size;
     try {
       await userstDb.doc(uid).update({
         'userCart': FieldValue.arrayUnion([
@@ -162,10 +162,7 @@ class CartProvider with ChangeNotifier {
     _cartItems.update(
       productId,
       (cartItem) => CartModel(
-        cartId: cartItem.cartId,
-        productId: productId,
-        quantity: qty,
-      ),
+          cartId: cartItem.cartId, productId: productId, quantity: qty),
     );
     notifyListeners();
   }

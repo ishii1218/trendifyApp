@@ -75,14 +75,15 @@ class _LoginScreenState extends State<LoginScreen> {
           textColor: Colors.white,
         );
         if (!mounted) return;
+        Navigator.pushReplacementNamed(context, RootScreen.routeName);
         // Check if the email is admin's
-        if (_emailController.text.trim() == "admin@gmail.com") {
-          // Navigate to DashboardScreen if email is admin
-          Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
-        } else {
-          // Otherwise, navigate to RootScreen
-          Navigator.pushReplacementNamed(context, RootScreen.routeName);
-        }
+        // if (_emailController.text.trim() == "admin@gmail.com") {
+        //   // Navigate to DashboardScreen if email is admin
+        //   Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+        // } else {
+        //   // Otherwise, navigate to RootScreen
+        //   Navigator.pushReplacementNamed(context, RootScreen.routeName);
+        // }
       } on FirebaseException catch (error) {
         await MyAppFunctions.showErrorOrWarningDialog(
           context: context,

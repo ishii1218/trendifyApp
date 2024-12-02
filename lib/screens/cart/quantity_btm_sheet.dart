@@ -11,6 +11,7 @@ class QuantityBottomSheetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
+    final List<String> sizes = ["S", "M", "L", "XL", "XXL"];
 
     return Column(
       children: [
@@ -28,6 +29,36 @@ class QuantityBottomSheetWidget extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
+        Text(
+          "Select Size",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 10),
+        // Size Selector
+        Expanded(
+          child: ListView.builder(
+            itemCount: sizes.length,
+            itemBuilder: (context, index) {
+              final size = sizes[index];
+              return InkWell(
+                onTap: () {
+                  cartProvider.updateSize(
+                    productId: cartModel.productId,
+                    size: size,
+                  );
+                  Navigator.pop(context);
+                },
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: SubtitleTextWidget(label: size),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+
         Expanded(
           child: ListView.builder(
               // physics: NeverScrollableScrollPhysics(),
