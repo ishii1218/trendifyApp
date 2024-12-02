@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users_en/consts/app_constants.dart';
 import 'package:shopsmart_users_en/providers/products_provider.dart';
+import 'package:shopsmart_users_en/widgets/caraousel/carousel_slider_widget.dart';
+import 'package:shopsmart_users_en/widgets/caraousel/slider.dart';
 import 'package:shopsmart_users_en/widgets/products/ctg_rounded_widget.dart';
 import 'package:shopsmart_users_en/widgets/products/latest_arrival.dart';
 
@@ -33,30 +35,34 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 15,
+              CustomHeaderCarousel(
+                imagePaths: AppConstants.bannersImages,
               ),
-              SizedBox(
-                height: size.height * 0.25,
-                child: ClipRRect(
-                  // borderRadius: BorderRadius.circular(50),
-                  child: Swiper(
-                    autoplay: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Image.asset(
-                        AppConstants.bannersImages[index],
-                        fit: BoxFit.fill,
-                      );
-                    },
-                    itemCount: AppConstants.bannersImages.length,
-                    pagination: const SwiperPagination(
-                      // alignment: Alignment.center,
-                      builder: DotSwiperPaginationBuilder(
-                          activeColor: Colors.red, color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
+
+              // const SizedBox(
+              //   height: 15,
+              // ),
+              // SizedBox(
+              //   height: size.height * 0.25,
+              //   child: ClipRRect(
+              //     // borderRadius: BorderRadius.circular(50),
+              //     child: Swiper(
+              //       autoplay: true,
+              //       itemBuilder: (BuildContext context, int index) {
+              //         return Image.asset(
+              //           AppConstants.bannersImages[index],
+              //           fit: BoxFit.fill,
+              //         );
+              //       },
+              //       itemCount: AppConstants.bannersImages.length,
+              //       pagination: const SwiperPagination(
+              //         // alignment: Alignment.center,
+              //         builder: DotSwiperPaginationBuilder(
+              //             activeColor: Colors.red, color: Colors.white),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 height: 15.0,
               ),
