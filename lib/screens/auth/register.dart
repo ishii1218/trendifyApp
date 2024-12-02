@@ -164,6 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        appBar: AppBar(title: const Text('')),
         body: LoadingManager(
           isLoading: _isLoading,
           child: Padding(
@@ -182,17 +183,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 30,
                   ),
                   const Align(
-                      alignment: Alignment.centerLeft,
+                      alignment: Alignment.center,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TitlesTextWidget(label: "Welcome back!"),
-                          SubtitleTextWidget(label: "Your welcome message"),
-                        ],
+                        // children: [
+                        //   TitlesTextWidget(label: "Welcome back!"),
+                        // ],
                       )),
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  // const SizedBox(
+                  //   height: 30,
+                  // ),
                   SizedBox(
                     height: size.width * 0.3,
                     width: size.width * 0.3,

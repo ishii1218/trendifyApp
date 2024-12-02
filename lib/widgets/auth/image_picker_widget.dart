@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -7,6 +6,7 @@ class PickImageWidget extends StatelessWidget {
   const PickImageWidget({super.key, this.pickedImage, required this.function});
   final XFile? pickedImage;
   final Function function;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -14,16 +14,12 @@ class PickImageWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(
-              18.0,
-            ),
+            borderRadius: BorderRadius.circular(18.0),
             child: pickedImage == null
                 ? Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(
-                        18.0,
-                      ),
+                      borderRadius: BorderRadius.circular(18.0),
                     ),
                   )
                 : Image.file(
@@ -47,7 +43,7 @@ class PickImageWidget extends StatelessWidget {
               child: const Padding(
                 padding: EdgeInsets.all(6.0),
                 child: Icon(
-                  Icons.add_shopping_cart_outlined,
+                  Icons.camera_alt_outlined, // Changed the icon here
                   size: 20,
                   color: Colors.white,
                 ),

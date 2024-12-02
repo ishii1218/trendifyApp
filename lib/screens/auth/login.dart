@@ -111,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        appBar: AppBar(title: const Text('')),
         body: LoadingManager(
           isLoading: _isLoading,
           child: Padding(
@@ -131,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.center,
                       child: TitlesTextWidget(label: "Welcome back!")),
                   const SizedBox(
-                    height: 180,
+                    height: 100,
                   ),
                   Form(
                     key: _formkey,

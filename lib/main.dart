@@ -26,6 +26,8 @@ import 'screens/auth/register.dart';
 import 'screens/inner_screen/orders/orders_screen.dart';
 import 'screens/inner_screen/wishlist.dart';
 import 'screens/search_screen.dart';
+import 'splashscreen.dart';
+import 'splashscreen2.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -113,10 +115,13 @@ class MyApp extends StatelessWidget {
                 theme: Styles.themeData(
                     isDarkTheme: themeProvider.getIsDarkTheme,
                     context: context),
-                home: const RootScreen(),
+                // home: const RootScreen(),
                 // home: const LoginScreen(),
+                home: const SplashScreen(),
                 routes: {
                   RootScreen.routeName: (context) => const RootScreen(),
+                  SplashScreen2.routeName: (context) => const SplashScreen2(),
+                  SplashScreen.routeName: (context) => const SplashScreen(),
                   ProductDetailsScreen.routName: (context) =>
                       const ProductDetailsScreen(),
                   WishlistScreen.routName: (context) => const WishlistScreen(),
