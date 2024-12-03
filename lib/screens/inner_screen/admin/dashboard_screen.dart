@@ -29,8 +29,8 @@ class DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         title: const TitlesTextWidget(label: "Dashboard Screen"),
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(AssetsManager.shoppingCart),
+          padding: const EdgeInsets.all(4.0),
+          child: Image.asset(AssetsManager.iconLogo),
         ),
         actions: [
           IconButton(

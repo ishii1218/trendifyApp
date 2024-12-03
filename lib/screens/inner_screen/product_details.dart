@@ -53,7 +53,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 children: [
                   FancyShimmerImage(
                     imageUrl: getCurrProduct.productImage,
-                    height: size.height * 0.38,
+                    height: size.height * 0.50,
                     width: double.infinity,
                   ),
                   const SizedBox(

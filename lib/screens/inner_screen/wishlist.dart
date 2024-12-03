@@ -25,14 +25,18 @@ class WishlistScreen extends StatelessWidget {
               subtitle:
                   "Looks like your cart is empty add something and make me happy",
               buttonText: "Shop now",
+              onPressed: () {
+                Navigator.pushNamed(
+                    context, "/SearchScreen"); // Navigate to the search screen
+              },
             ),
           )
         : Scaffold(
             appBar: AppBar(
               leading: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Image.asset(
-                  AssetsManager.shoppingCart,
+                  AssetsManager.iconLogo,
                 ),
               ),
               title: TitlesTextWidget(

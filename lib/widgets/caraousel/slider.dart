@@ -130,7 +130,8 @@ class _CustomHeaderCarouselState extends State<CustomHeaderCarousel> {
                       ),
                     ),
                     onPressed: () {
-                      // Action for the button
+                      Navigator.pushNamed(context,
+                          "/SearchScreen"); // Navigate to the search screen
                     },
                     child: Text(
                       "Shop Now",

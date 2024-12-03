@@ -19,19 +19,21 @@ class ViewedRecentlyScreen extends StatelessWidget {
     return viewedProdProvider.getViewedProds.isEmpty
         ? Scaffold(
             body: EmptyBagWidget(
-              imagePath: AssetsManager.orderBag,
-              title: "No viewed products yet",
-              subtitle:
-                  "Looks like your cart is empty add something and make me happy",
-              buttonText: "Shop now",
-            ),
+                imagePath: AssetsManager.orderBag,
+                title: "No viewed products yet",
+                subtitle:
+                    "Viewed products will be shown here, view products to see them here",
+                buttonText: "Shop now",
+                onPressed: () {
+                  Navigator.pushNamed(context, "/SearchScreen");
+                }),
           )
         : Scaffold(
             appBar: AppBar(
               leading: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Image.asset(
-                  AssetsManager.shoppingCart,
+                  AssetsManager.iconLogo,
                 ),
               ),
               title: TitlesTextWidget(

@@ -39,8 +39,12 @@ class _CartScreenState extends State<CartScreen> {
               imagePath: AssetsManager.shoppingBasket,
               title: "Your cart is empty",
               subtitle:
-                  "Looks like your cart is empty add something and make me happy",
+                  "Looks like your cart is empty shop now to add items to your cart",
               buttonText: "Shop now",
+              onPressed: () {
+                Navigator.pushNamed(
+                    context, "/SearchScreen"); // Navigate to the search screen
+              },
             ),
           )
         : Scaffold(
@@ -53,9 +57,9 @@ class _CartScreenState extends State<CartScreen> {
             }),
             appBar: AppBar(
               leading: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Image.asset(
-                  AssetsManager.shoppingCart,
+                  AssetsManager.iconLogo,
                 ),
               ),
               title: TitlesTextWidget(

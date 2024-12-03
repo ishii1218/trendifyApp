@@ -42,7 +42,7 @@ class WishlistProvider with ChangeNotifier {
         ])
       });
 
-      Fluttertoast.showToast(msg: "Item has been added");
+      Fluttertoast.showToast(msg: "Item has been added to wishlist");
     } catch (e) {
       rethrow;
     }
@@ -90,7 +90,7 @@ class WishlistProvider with ChangeNotifier {
         ])
       });
       _wishlistItems.remove(productId);
-      Fluttertoast.showToast(msg: "Item has been removed");
+      Fluttertoast.showToast(msg: "Item has been removed from Wishlist");
     } catch (e) {
       rethrow;
     }

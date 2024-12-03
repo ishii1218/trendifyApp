@@ -12,7 +12,7 @@ import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 // import '../widgets/title_text.dart';
 
 class AdminSearchScreen extends StatefulWidget {
-  static const routeName = '/SearchScreen';
+  static const routeName = '/AdminSearchScreen';
   const AdminSearchScreen({super.key});
 
   @override
