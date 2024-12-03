@@ -36,14 +36,18 @@ class AssetsManager {
   static String banner1 = "$bannersImagesPath/banner1.png";
   static String banner2 = "$bannersImagesPath/banner2.png";
   // Categories path
-  static String shirt = "$categoriesImagesPath/shirt.png";
+  static String shirt = "$categoriesImagesPath/shirts.png";
   static String trousers = "$categoriesImagesPath/trousers.png";
   static String hoodie = "$categoriesImagesPath/hoodie.png";
   static String vest = "$categoriesImagesPath/vest.png";
   static String beanie = "$categoriesImagesPath/beanie.png";
   static String coat = "$categoriesImagesPath/coat.png";
-  static String shorts = "$categoriesImagesPath/shorts.png";
+  static String shorts = "$categoriesImagesPath/shorts.jpg";
+  static String shortsw = "$categoriesImagesPath/shortsw.png";
 
   static String order = "$dashboardImagesPath/order.png";
   static String cloud = "$dashboardImagesPath/cloud.png";
+  static String inspect = "$dashboardImagesPath/inspect.png";
+  static String cartlist = "$dashboardImagesPath/cartlist.png";
+  static String upload2 = "$dashboardImagesPath/upload2.png";
 }
