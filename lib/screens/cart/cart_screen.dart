@@ -42,8 +42,7 @@ class _CartScreenState extends State<CartScreen> {
                   "Looks like your cart is empty shop now to add items to your cart",
               buttonText: "Shop now",
               onPressed: () {
-                Navigator.pushNamed(
-                    context, "/SearchScreen"); // Navigate to the search screen
+                Navigator.pushNamed(context, "/SearchScreen");
               },
             ),
           )
@@ -122,26 +121,35 @@ class _CartScreenState extends State<CartScreen> {
       setState(() {
         _isLoading = true;
       });
-      cartProvider.getCartitems.forEach((key, value) async {
-        final getCurrProduct = productProvider.findByProdId(value.productId);
-        final orderId = const Uuid().v4();
-        await FirebaseFirestore.instance
-            .collection("ordersAdvanced")
-            .doc(orderId)
-            .set({
-          'orderId': orderId,
-          'userId': uid,
-          'productId': value.productId,
-          "productTitle": getCurrProduct!.productTitle,
-          'price': double.parse(getCurrProduct.productPrice) * value.quantity,
-          'totalPrice':
-              cartProvider.getTotal(productsProvider: productProvider),
-          'quantity': value.quantity,
-          'imageUrl': getCurrProduct.productImage,
-          'userName': userProvider.getUserModel!.userName,
-          'orderDate': Timestamp.now(),
-        });
+
+      final orderId = const Uuid().v4(); // Generate a single order ID
+      final List<Map<String, dynamic>> orderItems =
+          cartProvider.getCartitems.values.map((cartItem) {
+        final product = productProvider.findByProdId(cartItem.productId);
+        return {
+          'productId': cartItem.productId,
+          'productTitle': product?.productTitle,
+          'price': double.parse(product!.productPrice) * cartItem.quantity,
+          'quantity': cartItem.quantity,
+          'imageUrl': product.productImage,
+        };
+      }).toList();
+
+      final totalPrice =
+          cartProvider.getTotal(productsProvider: productProvider);
+
+      await FirebaseFirestore.instance
+          .collection("ordersAdvanced")
+          .doc(orderId)
+          .set({
+        'orderId': orderId,
+        'userId': uid,
+        'items': orderItems,
+        'totalPrice': totalPrice,
+        'userName': userProvider.getUserModel!.userName,
+        'orderDate': Timestamp.now(),
       });
+
       await cartProvider.clearCartFromFirebase();
       cartProvider.clearLocalCart();
     } catch (e) {
@@ -156,4 +164,54 @@ class _CartScreenState extends State<CartScreen> {
       });
     }
   }
+
+  // Future<void> placeOrderAdvanced({
+  //   required CartProvider cartProvider,
+  //   required ProductsProvider productProvider,
+  //   required UserProvider userProvider,
+  // }) async {
+  //   final auth = FirebaseAuth.instance;
+  //   User? user = auth.currentUser;
+  //   if (user == null) {
+  //     return;
+  //   }
+  //   final uid = user.uid;
+  //   try {
+  //     setState(() {
+  //       _isLoading = true;
+  //     });
+  //     cartProvider.getCartitems.forEach((key, value) async {
+  //       final getCurrProduct = productProvider.findByProdId(value.productId);
+  //       final orderId = const Uuid().v4();
+  //       await FirebaseFirestore.instance
+  //           .collection("ordersAdvanced")
+  //           .doc(orderId)
+  //           .set({
+  //         'orderId': orderId,
+  //         'userId': uid,
+  //         'productId': value.productId,
+  //         "productTitle": getCurrProduct!.productTitle,
+  //         'price': double.parse(getCurrProduct.productPrice) * value.quantity,
+  //         'totalPrice':
+  //             cartProvider.getTotal(productsProvider: productProvider),
+  //         'quantity': value.quantity,
+  //         'imageUrl': getCurrProduct.productImage,
+  //         'userName': userProvider.getUserModel!.userName,
+  //         'orderDate': Timestamp.now(),
+  //       });
+  //     });
+  //     await cartProvider.clearCartFromFirebase();
+  //     cartProvider.clearLocalCart();
+  //   } catch (e) {
+  //     await MyAppFunctions.showErrorOrWarningDialog(
+  //       context: context,
+  //       subtitle: e.toString(),
+  //       fct: () {},
+  //     );
+  //   } finally {
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
+  //   }
+  // }
 }
