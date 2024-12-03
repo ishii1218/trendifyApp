@@ -24,16 +24,16 @@ class DashboardButtonsWidget extends StatelessWidget {
           children: [
             Image.asset(
               imagePath,
-              height: 65,
-              width: 65,
+              height: 80,
+              width: 80,
             ),
             const SizedBox(
-              height: 15,
+              height: 2,
             ),
             SubtitleTextWidget(
               label: title,
               fontSize: 18,
-            )
+            ),
           ],
         ),
       ),

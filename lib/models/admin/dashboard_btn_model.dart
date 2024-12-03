@@ -24,7 +24,7 @@ class DashboardButtonsModel {
   static List<DashboardButtonsModel> dashboardBtnList(BuildContext context) => [
         DashboardButtonsModel(
           text: "Add a new product",
-          imagePath: AssetsManager.cloud,
+          imagePath: AssetsManager.upload2,
           onPressed: () {
             Navigator.pushNamed(
               context,
@@ -33,8 +33,8 @@ class DashboardButtonsModel {
           },
         ),
         DashboardButtonsModel(
-          text: "inspect all products",
-          imagePath: AssetsManager.shoppingCart,
+          text: "Inspect all products",
+          imagePath: AssetsManager.inspect,
           onPressed: () {
             Navigator.pushNamed(
               context,
@@ -44,7 +44,7 @@ class DashboardButtonsModel {
         ),
         DashboardButtonsModel(
           text: "View Orders",
-          imagePath: AssetsManager.order,
+          imagePath: AssetsManager.cartlist,
           onPressed: () {
             Navigator.pushNamed(
               context,

@@ -61,7 +61,7 @@ class AppConstants {
     ),
     CategoriesModel(
       id: "Shorts(W)",
-      image: AssetsManager.shorts,
+      image: AssetsManager.shortsw,
       name: "Shorts",
     ),
     CategoriesModel(
