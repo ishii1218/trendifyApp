@@ -18,34 +18,61 @@ class AppConstants {
       name: "Shirts",
     ),
     CategoriesModel(
-      id: "Trousers",
+      id: "Trousers(M)",
       image: AssetsManager.trousers,
       name: "Trousers",
     ),
     CategoriesModel(
-      id: "Hoodie",
+      id: "Hoodies",
       image: AssetsManager.hoodie,
-      name: "Hoodie",
+      name: "Hoodies",
     ),
     CategoriesModel(
-      id: "Vest",
+      id: "Shorts(M)",
+      image: AssetsManager.shorts,
+      name: "Shorts",
+    ),
+    // CategoriesModel(
+    //   id: "Vest",
+    //   image: AssetsManager.vest,
+    //   name: "Vest",
+    // ),
+    // CategoriesModel(
+    //   id: "Shorts",
+    //   image: AssetsManager.shorts,
+    //   name: "Shorts",
+    // ),
+    // CategoriesModel(
+    //   id: "Beanie",
+    //   image: AssetsManager.beanie,
+    //   name: "Beanie",
+    // ),
+    // CategoriesModel(
+    //   id: "Coat",
+    //   image: AssetsManager.coat,
+    //   name: "Coat",
+    // ),
+  ];
+  static List<CategoriesModel> categoriesListwomen = [
+    CategoriesModel(
+      id: "Frocks",
       image: AssetsManager.vest,
-      name: "Vest",
+      name: "Frocks",
     ),
     CategoriesModel(
-      id: "Shorts",
+      id: "Shorts(W)",
       image: AssetsManager.shorts,
       name: "Shorts",
     ),
     CategoriesModel(
-      id: "Beanie",
+      id: "Blouses",
       image: AssetsManager.beanie,
-      name: "Beanie",
+      name: "Blouses",
     ),
     CategoriesModel(
-      id: "Coat",
+      id: "Trousers(W)",
       image: AssetsManager.coat,
-      name: "Coat",
+      name: "Trousers",
     ),
   ];
 }
