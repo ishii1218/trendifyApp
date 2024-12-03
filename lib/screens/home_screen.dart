@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.all(4.0),
+          padding: const EdgeInsets.all(2.0),
           child: Image.asset(
             AssetsManager.iconLogo,
           ),
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
         title: const AppNameTextWidget(fontSize: 20),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(1.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,6 +102,24 @@ class HomeScreen extends StatelessWidget {
                   return CategoryRoundedWidget(
                     image: AppConstants.categoriesList[index].image,
                     name: AppConstants.categoriesList[index].name,
+                    id: AppConstants.categoriesList[index].id,
+                  );
+                }),
+              ),
+              const TitlesTextWidget(label: "Womens Section"),
+              const SizedBox(
+                height: 15.0,
+              ),
+              GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 4,
+                children: List.generate(AppConstants.categoriesListwomen.length,
+                    (index) {
+                  return CategoryRoundedWidget(
+                    image: AppConstants.categoriesListwomen[index].image,
+                    name: AppConstants.categoriesListwomen[index].name,
+                    id: AppConstants.categoriesListwomen[index].id,
                   );
                 }),
               ),

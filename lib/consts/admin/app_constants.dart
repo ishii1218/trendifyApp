@@ -5,23 +5,30 @@ class AppConstants {
       'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png';
 
   static List<String> categoriesList = [
-    'Shorts',
-    'Trousers',
+    'Shorts(M)',
+    'Trousers(M)',
     'Shirts',
-    'Hoodie',
-    'Coat',
-    'Vest',
-    'Beanie',
+    'Hoodies',
+  ];
+  static List<String> categoriesListwomen = [
+    'Frocks',
+    'Shorts(W)',
+    'Blouses',
+    'Trousers(W)',
+  ];
+  static List<String> categoriesListTot = [
+    ...categoriesList,
+    ...categoriesListwomen,
   ];
 
   static List<DropdownMenuItem<String>>? get categoriesDropDownList {
     List<DropdownMenuItem<String>>? menuItems =
         List<DropdownMenuItem<String>>.generate(
-      categoriesList.length,
+      categoriesListTot.length,
       (index) => DropdownMenuItem(
-        value: categoriesList[index],
+        value: categoriesListTot[index],
         child: Text(
-          categoriesList[index],
+          categoriesListTot[index],
         ),
       ),
     );
