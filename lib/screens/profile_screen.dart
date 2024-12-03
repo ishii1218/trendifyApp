@@ -64,9 +64,9 @@ class _ProfileScreenState extends State<ProfileScreen>
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
           child: Image.asset(
-            AssetsManager.shoppingCart,
+            AssetsManager.iconLogo,
           ),
         ),
         title: const AppNameTextWidget(fontSize: 20),
@@ -150,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     Visibility(
                       visible: userModel == null ? false : true,
                       child: CustomListTile(
-                        text: "All Order",
+                        text: "My Orders",
                         imagePath: AssetsManager.orderSvg,
                         function: () {
                           Navigator.pushNamed(
@@ -211,7 +211,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               Center(
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF36C8F4),
+                    backgroundColor: Colors.red,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                         30.0,

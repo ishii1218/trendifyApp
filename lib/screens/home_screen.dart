@@ -1,9 +1,7 @@
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users_en/consts/app_constants.dart';
 import 'package:shopsmart_users_en/providers/products_provider.dart';
-import 'package:shopsmart_users_en/widgets/caraousel/carousel_slider_widget.dart';
 import 'package:shopsmart_users_en/widgets/caraousel/slider.dart';
 import 'package:shopsmart_users_en/widgets/products/ctg_rounded_widget.dart';
 import 'package:shopsmart_users_en/widgets/products/latest_arrival.dart';
@@ -64,19 +62,19 @@ class HomeScreen extends StatelessWidget {
               //   ),
               // ),
               const SizedBox(
-                height: 15.0,
+                height: 30.0,
               ),
               Visibility(
                 visible: productsProvider.getProducts.isNotEmpty,
                 child: const TitlesTextWidget(label: "Latest arrival"),
               ),
               const SizedBox(
-                height: 15.0,
+                height: 10.0,
               ),
               Visibility(
                 visible: productsProvider.getProducts.isNotEmpty,
                 child: SizedBox(
-                  height: size.height * 0.2,
+                  height: size.height * 0.38,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: productsProvider.getProducts.length < 10

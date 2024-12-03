@@ -10,9 +10,11 @@ class EmptyBagWidget extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.buttonText,
+    required this.onPressed,
   });
 
   final String imagePath, title, subtitle, buttonText;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -62,7 +64,7 @@ class EmptyBagWidget extends StatelessWidget {
                 backgroundColor: Colors.red,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 15)),
-            onPressed: () {},
+            onPressed: onPressed,
             child: Text(buttonText),
           ),
         ],

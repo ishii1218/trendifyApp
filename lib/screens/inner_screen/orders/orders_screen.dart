@@ -43,6 +43,10 @@ class _OrdersScreenFreeState extends State<OrdersScreenFree> {
                 title: "No orders has been placed yet",
                 subtitle: "",
                 buttonText: "Shop now",
+                onPressed: () {
+                  Navigator.pushNamed(context,
+                      "/SearchScreen"); // Navigate to the search screen
+                },
               );
             }
             return ListView.separated(
