@@ -12,6 +12,7 @@ import 'package:shopsmart_users_en/root_screen.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/admin/admin_search_screen.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/admin/dashboard_screen.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/admin/edit_upload_product_form.dart';
+import 'package:shopsmart_users_en/screens/inner_screen/orders/admin/admin_orders_screen.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/product_details.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/viewed_recently.dart';
 
@@ -142,6 +143,8 @@ class MyApp extends StatelessWidget {
                   // ignore: equal_keys_in_map
                   AdminSearchScreen.routeName: (context) =>
                       const AdminSearchScreen(),
+                  AdminOrdersScreenFree.routeName: (context) =>
+                      const AdminOrdersScreenFree(),
                   // SearchScreen.routeName: (context) => const SearchScreen(),
                   // OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
                 },

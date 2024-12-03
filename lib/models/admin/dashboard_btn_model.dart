@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/admin/edit_upload_product_form.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/admin/admin_search_screen.dart';
 
-import 'package:shopsmart_users_en/screens/inner_screen/orders/admin/orders_screen.dart';
+import 'package:shopsmart_users_en/screens/inner_screen/orders/admin/admin_orders_screen.dart';
 
 import 'package:shopsmart_users_en/services/assets_manager.dart';
 
@@ -48,7 +48,7 @@ class DashboardButtonsModel {
           onPressed: () {
             Navigator.pushNamed(
               context,
-              OrdersScreenFree.routeName,
+              AdminOrdersScreenFree.routeName,
             );
           },
         ),

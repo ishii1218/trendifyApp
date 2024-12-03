@@ -58,7 +58,11 @@ class QuantityBottomSheetWidget extends StatelessWidget {
             },
           ),
         ),
-
+        Text(
+          "Select Quantity",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 10),
         Expanded(
           child: ListView.builder(
               // physics: NeverScrollableScrollPhysics(),
