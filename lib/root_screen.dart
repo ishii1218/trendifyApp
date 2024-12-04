@@ -59,8 +59,8 @@ class _RootScreenState extends State<RootScreen> {
     try {
       final user = await userProvider.fetchUserInfo();
       setState(() {
-        isAdmin = user?.userEmail == "admin@gmail.com"; // Check for admin email
-        screens = _getScreens(); // Update screens dynamically
+        isAdmin = user?.userEmail == "admin@gmail.com";
+        screens = _getScreens();
       });
     } catch (error) {
       log(error.toString());

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users_en/providers/cart_provider.dart';
 import 'package:shopsmart_users_en/screens/cart/cart_widget.dart';
+import 'package:shopsmart_users_en/screens/inner_screen/orders/checkout_page.dart';
 import 'package:shopsmart_users_en/screens/loading_manager.dart';
 import 'package:shopsmart_users_en/services/assets_manager.dart';
 import 'package:shopsmart_users_en/services/my_app_functions.dart';
@@ -152,6 +153,15 @@ class _CartScreenState extends State<CartScreen> {
 
       await cartProvider.clearCartFromFirebase();
       cartProvider.clearLocalCart();
+
+      Navigator.pushNamed(
+        context,
+        CheckoutPage.routeName,
+        arguments: {
+          'orderItems': orderItems,
+          'totalPrice': totalPrice,
+        },
+      );
     } catch (e) {
       await MyAppFunctions.showErrorOrWarningDialog(
         context: context,

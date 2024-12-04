@@ -19,10 +19,27 @@ class CategoryRoundedWidget extends StatelessWidget {
       },
       child: Column(
         children: [
-          Image.asset(
-            image,
-            height: 50,
-            width: 50,
+          Container(
+            height: 70, // Increased size of the icon
+            width: 70,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200, // Background color (optional)
+              borderRadius: BorderRadius.circular(15), // Curved borders
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 5,
+                  offset: Offset(2, 2),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           const SizedBox(
             height: 5,

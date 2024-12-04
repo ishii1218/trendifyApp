@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users_en/providers/admin/admin_order_provider.dart';
 import 'package:shopsmart_users_en/providers/admin/admin_product_provider.dart';
@@ -13,6 +14,8 @@ import 'package:shopsmart_users_en/screens/inner_screen/admin/admin_search_scree
 import 'package:shopsmart_users_en/screens/inner_screen/admin/dashboard_screen.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/admin/edit_upload_product_form.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/orders/admin/admin_orders_screen.dart';
+import 'package:shopsmart_users_en/screens/inner_screen/orders/admin/payment_screen.dart';
+import 'package:shopsmart_users_en/screens/inner_screen/orders/checkout_page.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/product_details.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/viewed_recently.dart';
 
@@ -32,6 +35,8 @@ import 'splashscreen2.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey =
+      'pk_test_51PRWiNP2j6GyuA7Txuu5OLDVqCbhkBHJS1vsZmIqs8ruadbfnYftQTUd6xYtr1Y5NtfY1MzKwYu5poX50SwFcb9s00qRJ4Ftu6';
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: const FirebaseOptions(
@@ -119,6 +124,22 @@ class MyApp extends StatelessWidget {
                 home: const RootScreen(),
                 // home: const LoginScreen(),
                 // home: const SplashScreen(),
+                onGenerateRoute: (settings) {
+                  if (settings.name == CheckoutPage.routeName) {
+                    final args = settings.arguments as Map<String, dynamic>;
+                    return MaterialPageRoute(
+                      builder: (context) => CheckoutPage(
+                        orderItems:
+                            args['orderItems'] as List<Map<String, dynamic>>,
+                        totalPrice: args['totalPrice'] as double,
+                      ),
+                    );
+                  }
+
+                  // Add more routes here if needed.
+                  return null;
+                },
+
                 routes: {
                   RootScreen.routeName: (context) => const RootScreen(),
                   SplashScreen2.routeName: (context) => const SplashScreen2(),
@@ -145,6 +166,9 @@ class MyApp extends StatelessWidget {
                       const AdminSearchScreen(),
                   AdminOrdersScreenFree.routeName: (context) =>
                       const AdminOrdersScreenFree(),
+                  PaymentScreen.routeName: (context) => const PaymentScreen(),
+
+                  // CheckoutPage.routeName: (context) => const CheckoutPage(),
                   // SearchScreen.routeName: (context) => const SearchScreen(),
                   // OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
                 },
