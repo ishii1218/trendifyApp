@@ -11,6 +11,7 @@ import 'package:shopsmart_users_en/screens/loading_manager.dart';
 import 'package:shopsmart_users_en/services/assets_manager.dart';
 import 'package:shopsmart_users_en/services/my_app_functions.dart';
 import 'package:shopsmart_users_en/widgets/subtitle_text.dart';
+import '../providers/address_provider.dart';
 
 import '../models/user_model.dart';
 import '../providers/theme_provider.dart';
@@ -181,7 +182,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                     CustomListTile(
                       text: "Address",
                       imagePath: AssetsManager.address,
-                      function: () {},
+                      function: () {
+                        Navigator.pushNamed(context, AddressFormPage.routeName);
+                      },
                     ),
                     const SizedBox(height: 6),
                     const Divider(

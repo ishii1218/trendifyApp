@@ -7,6 +7,8 @@ import 'package:shopsmart_users_en/providers/admin/admin_order_provider.dart';
 import 'package:shopsmart_users_en/providers/admin/admin_product_provider.dart';
 import 'package:shopsmart_users_en/providers/order_provider.dart';
 import 'package:shopsmart_users_en/providers/products_provider.dart';
+import 'package:shopsmart_users_en/providers/address_provider.dart';
+
 import 'package:shopsmart_users_en/providers/theme_provider.dart';
 import 'package:shopsmart_users_en/root_screen.dart';
 import 'package:shopsmart_users_en/screens/inner_screen/admin/admin_search_screen.dart';
@@ -120,6 +122,7 @@ class MyApp extends StatelessWidget {
                 // home: const LoginScreen(),
                 // home: const SplashScreen(),
                 routes: {
+                  AddressFormPage.routeName: (context) => AddressFormPage(),
                   RootScreen.routeName: (context) => const RootScreen(),
                   SplashScreen2.routeName: (context) => const SplashScreen2(),
                   SplashScreen.routeName: (context) => const SplashScreen(),
