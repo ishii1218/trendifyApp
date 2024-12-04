@@ -21,6 +21,64 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   String? selectedSize;
 
+  void showSizeChart(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text("Size Chart"),
+        content: SingleChildScrollView(
+          child: Column(
+            children: [
+              DataTable(
+                columnSpacing: 20.0,
+                columns: const [
+                  DataColumn(label: Text('Size')),
+                  DataColumn(label: Text('Chest (in)')),
+                  DataColumn(label: Text('Waist (in)')),
+                ],
+                rows: const [
+                  DataRow(cells: [
+                    DataCell(Text('S')),
+                    DataCell(Text('34-36')),
+                    DataCell(Text('28-30')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('M')),
+                    DataCell(Text('38-40')),
+                    DataCell(Text('32-34')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('L')),
+                    DataCell(Text('42-44')),
+                    DataCell(Text('36-38')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('XL')),
+                    DataCell(Text('46-48')),
+                    DataCell(Text('40-42')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('XXL')),
+                    DataCell(Text('50-52')),
+                    DataCell(Text('44-46')),
+                  ]),
+                ],
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+            child: const Text("Close"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -33,7 +91,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            // Navigator.canPop(context) ? Navigator.pop(context) : null;
             if (Navigator.canPop(context)) {
               Navigator.pop(context);
             }
@@ -43,7 +100,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             size: 20,
           ),
         ),
-        // automaticallyImplyLeading: false,
         title: const AppNameTextWidget(fontSize: 20),
       ),
       body: getCurrProduct == null
@@ -108,7 +164,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             });
                           },
                         ),
+                        const SizedBox(height: 10),
+
+                        // Size Chart Button
+                        TextButton(
+                          onPressed: () => showSizeChart(context),
+                          child: const Text(
+                            "View Size Chart",
+                            style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 20),
+
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 30),
                           child: Row(
