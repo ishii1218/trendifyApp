@@ -4,7 +4,8 @@ class CategoryRoundedWidget extends StatelessWidget {
   final String image;
   final String name;
 
-  CategoryRoundedWidget({required this.image, required this.name});
+  const CategoryRoundedWidget(
+      {super.key, required this.image, required this.name});
 
   @override
   Widget build(BuildContext context) {

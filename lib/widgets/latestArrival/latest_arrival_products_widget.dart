@@ -4,7 +4,8 @@ class LatestArrivalProductsWidget extends StatelessWidget {
   final String imageUrl;
   final String productName;
 
-  LatestArrivalProductsWidget({
+  const LatestArrivalProductsWidget({
+    super.key,
     required this.imageUrl,
     required this.productName,
   });

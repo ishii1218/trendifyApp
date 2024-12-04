@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final productsProvider = Provider.of<ProductsProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -87,39 +88,79 @@ class HomeScreen extends StatelessWidget {
                       }),
                 ),
               ),
-              const TitlesTextWidget(label: "Mens Section"),
               const SizedBox(
                 height: 15.0,
               ),
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 4,
-                children:
-                    List.generate(AppConstants.categoriesList.length, (index) {
-                  return CategoryRoundedWidget(
-                    image: AppConstants.categoriesList[index].image,
-                    name: AppConstants.categoriesList[index].name,
-                    id: AppConstants.categoriesList[index].id,
-                  );
-                }),
-              ),
-              const TitlesTextWidget(label: "Womens Section"),
+              const TitlesTextWidget(label: "Men's Section"),
               const SizedBox(
                 height: 15.0,
               ),
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 4,
-                children: List.generate(AppConstants.categoriesListwomen.length,
-                    (index) {
-                  return CategoryRoundedWidget(
-                    image: AppConstants.categoriesListwomen[index].image,
-                    name: AppConstants.categoriesListwomen[index].name,
-                    id: AppConstants.categoriesListwomen[index].id,
-                  );
-                }),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      blurRadius: 6,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: GridView.count(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                  childAspectRatio: 0.99,
+                  children: List.generate(AppConstants.categoriesList.length,
+                      (index) {
+                    return CategoryRoundedWidget(
+                      image: AppConstants.categoriesList[index].image,
+                      name: AppConstants.categoriesList[index].name,
+                      id: AppConstants.categoriesList[index].id,
+                    );
+                  }),
+                ),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              const TitlesTextWidget(label: "Women's Section"),
+              const SizedBox(
+                height: 15.0,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                decoration: BoxDecoration(
+                  color: Colors.pink.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      blurRadius: 6,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: GridView.count(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                  childAspectRatio: 0.99,
+                  children: List.generate(
+                      AppConstants.categoriesListwomen.length, (index) {
+                    return CategoryRoundedWidget(
+                      image: AppConstants.categoriesListwomen[index].image,
+                      name: AppConstants.categoriesListwomen[index].name,
+                      id: AppConstants.categoriesListwomen[index].id,
+                    );
+                  }),
+                ),
               ),
             ],
           ),
