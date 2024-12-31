@@ -18,17 +18,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
     super.initState();
     _paymentStatus = "Awaiting Payment...";
 
-    // Set the publishable key for Stripe
     Stripe.publishableKey =
         'pk_test_51PRWiNP2j6GyuA7Txuu5OLDVqCbhkBHJS1vsZmIqs8ruadbfnYftQTUd6xYtr1Y5NtfY1MzKwYu5poX50SwFcb9s00qRJ4Ftu6'; // Use your Stripe publishable key here
   }
 
   Future<void> _startPayment(double totalPrice) async {
     try {
-      // Create a PaymentIntent
       final paymentIntent = await _createPaymentIntent(totalPrice);
 
-      // Use PaymentIntent client_secret to confirm the payment
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
           paymentIntentClientSecret: paymentIntent['client_secret'],
@@ -36,7 +33,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
       );
 
-      // Present the PaymentSheet
       await Stripe.instance.presentPaymentSheet();
 
       setState(() {
@@ -51,8 +47,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   Future<Map<String, dynamic>> _createPaymentIntent(double amount) async {
-    // Simulated PaymentIntent creation (In production, create this in a backend)
-    // The amount must be in cents for Stripe (e.g., $10.99 -> 1099)
     return {
       'client_secret':
           'sk_test_51PRWiNP2j6GyuA7TRujnre7fUnTF0Ahsy83NI4pljtXA3HCTUoF961mYjk8CJ7L9Myfnd1V0ofhbtvrgEYOOUwiA00RXpJ4I3g', // Replace this with a real client_secret in production
@@ -61,38 +55,104 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Retrieve arguments
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final totalPrice = args['totalPrice'] as double;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Payment")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Total Amount: \$${totalPrice.toStringAsFixed(2)}",
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      appBar: AppBar(
+        title: const Text("Secure Payment"),
+        centerTitle: true,
+        backgroundColor: Colors.deepPurple,
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.deepPurple, Colors.purpleAccent],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Center(
+          child: Container(
+            padding: const EdgeInsets.all(20.0),
+            margin: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10,
+                  spreadRadius: 1,
+                  offset: const Offset(0, 5),
+                ),
+              ],
             ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _startPayment(totalPrice),
-              child: const Text("Pay with Stripe"),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.payment,
+                  size: 80,
+                  color: Color.fromARGB(255, 207, 181, 59),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  "Total Amount",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  "\$${totalPrice.toStringAsFixed(2)}",
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton.icon(
+                  onPressed: () => _startPayment(totalPrice),
+                  icon: const Icon(Icons.credit_card),
+                  label: const Text("Pay with Stripe"),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                    backgroundColor: const Color.fromARGB(255, 238, 238, 238),
+                    textStyle: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 20.0,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  _paymentStatus,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: _paymentStatus.contains("Successful")
+                        ? Colors.green
+                        : Colors.red,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 20),
-            Text(
-              _paymentStatus,
-              style: TextStyle(
-                fontSize: 16,
-                color: _paymentStatus.contains("Successful")
-                    ? Colors.green
-                    : Colors.red,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

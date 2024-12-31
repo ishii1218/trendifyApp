@@ -332,7 +332,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         onPressed: () {
                                           // Add Google sign-in logic here
                                         },
-                                        child: Row(
+                                        child: const Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           // children: [
@@ -354,8 +354,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                               color: Colors
                                                   .red, // Google's branding color
                                             ),
-                                            const SizedBox(width: 5),
-                                            const Text(
+                                            SizedBox(width: 5),
+                                            Text(
                                               "Google",
                                               style: TextStyle(
                                                 color: Colors
@@ -384,14 +384,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         onPressed: () {
                                           // Add Facebook sign-in logic here
                                         },
-                                        child: Row(
+                                        child: const Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
                                             Icon(Icons.facebook,
                                                 color: Colors.white),
-                                            const SizedBox(width: 5),
-                                            const Text(
+                                            SizedBox(width: 5),
+                                            Text(
                                               "Facebook",
                                               style: TextStyle(
                                                   color: Colors.white),
@@ -418,14 +418,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         onPressed: () {
                                           // Add Apple sign-in logic here
                                         },
-                                        child: Row(
+                                        child: const Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
                                             Icon(Icons.apple,
                                                 color: Colors.white),
-                                            const SizedBox(width: 5),
-                                            const Text(
+                                            SizedBox(width: 5),
+                                            Text(
                                               "Apple",
                                               style: TextStyle(
                                                   color: Colors.white),
@@ -447,7 +447,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       .pushNamed(RegisterScreen.routName);
                                 },
                                 child: const Text(
-                                  "Already have an account? Sign in",
+                                  "Don't have an account? Sign up",
                                   style: TextStyle(
                                       fontSize: 14.0, color: Colors.grey),
                                 ),

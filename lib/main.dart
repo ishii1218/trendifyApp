@@ -123,9 +123,9 @@ class MyApp extends StatelessWidget {
                 theme: Styles.themeData(
                     isDarkTheme: themeProvider.getIsDarkTheme,
                     context: context),
-                home: const RootScreen(),
+                // home: const RootScreen(),
                 // home: const LoginScreen(),
-                // home: const SplashScreen(),
+                home: const SplashScreen(),
                 onGenerateRoute: (settings) {
                   if (settings.name == CheckoutPage.routeName) {
                     final args = settings.arguments as Map<String, dynamic>;
